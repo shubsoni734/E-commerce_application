@@ -22,7 +22,7 @@ import {
 import Checkbox from "expo-checkbox";
 import AppLoading from "expo-app-loading";
 // import Register from "./Register";
-import { ref, set,get } from "firebase/database";
+import { ref, set, get, onValue } from "firebase/database";
 import { db } from "./firbass_connect";
 
 //app main contant
@@ -37,17 +37,46 @@ const Contact = ({ navigation }) => {
   // }
   const Submit = () => {
     // return Alert.alert(userName,password);
-    get(child(db, `user/${email}`))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          console.log(snapshot.val());
-        } else {
-          console.log("No data available");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+
+    // insert data into firebase
+
+    // get(child(db, `user/${email}`))
+    //   .then((snapshot) => {
+    //     if (snapshot.exists()) {
+    //       console.log(snapshot.val());
+    //     } else {
+    //       console.log("No data available");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //   });
+    //fjxj djcnc
+    try {
+      if (!email.trim()) {
+        Alert.alert("Every Field is required !");
+      }
+      if (!password.trim()) {
+        Alert.alert("Every Field is required !");
+      } else {
+        const starCountRef = ref(db, "user/" + email);
+
+        onValue(starCountRef, (snapshot) => {
+          const data = snapshot.val();
+
+          // const email1=data.em ail;
+          if (password === data.password) {
+            navigation.navigate("Home");
+          } else {
+            alert("Email and Password is wrong !");
+          }
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      alert("enail is not register ");
+    }
+
     // set(ref(db, "users/" + email), {
     //   Email: email,
     //   Password: password,
@@ -58,12 +87,13 @@ const Contact = ({ navigation }) => {
     //   .catch((error) => {
     //     alert(error);
     //   });
-    if (email === "shubham" && password === "123") {
-      Alert.alert("thanks you " + email);
-      navigation.navigate("Home");
-    } else {
-      Alert.alert("Email and Password is wrong !");
-    }
+
+    // if (email === "shubham" && password === "123") {
+    //   Alert.alert("thanks you " + email);
+    //   navigation.navigate("Home");
+    // } else {
+    //   Alert.alert("Email and Password is wrong !");
+    // }
   };
 
   let [fontLoaded, error] = useFonts({

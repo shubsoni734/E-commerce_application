@@ -1,5 +1,4 @@
 import { View, Text } from 'react-native'
-import * as firebaseobj from '@react-native-firebase/app';
 import {fire_connect} from './component/firbass_connect'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
