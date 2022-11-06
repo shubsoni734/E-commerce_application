@@ -3,9 +3,10 @@ import {
   Text,
   StyleSheet,
   ScrollView,
-  SafeAreaView,
   TouchableOpacity,
+  
   Image,
+  Button,
 } from "react-native";
 import React, { startTransition } from "react";
 import Ionic from "react-native-vector-icons/Ionicons";
@@ -13,7 +14,7 @@ import { ImageSlider } from "react-native-image-slider-banner";
 // import {} from 'react-native-image-slider-box';
 import Category from "./scroll/category";
 
-const Home = () => {
+const Home = ({navigation}) => {
   return (
     <View>
       <View style={Style.header}>
@@ -56,8 +57,8 @@ const Home = () => {
               horizontal={true}
               showsHorizontalScrollIndicator={false}>
                 <Category
-                  imageUri={require("../image/flow.jpg")}
-                  name="flower"
+                  imageUri={require("../image/code.jpg")}
+                  name="code"
                 />
                 <Category
                 
@@ -65,8 +66,8 @@ const Home = () => {
                   name="flower"
                 />
                 <Category
-                  imageUri={require("../image/flow.jpg")}
-                  name="flower"
+                  imageUri={require("../image/code.jpg")}
+                  name="code"
                 />
                 <Category
                   imageUri={require("../image/flow.jpg")}
@@ -88,11 +89,12 @@ const Home = () => {
               showsHorizontalScrollIndicator={false}>
                 <Category
                   imageUri={require("../image/flow.jpg")}
-                  name="flower"
+                  name="flower123"
+                  onPress={() => navigation.navigate("Login")}
                 />
                 <Category
                 
-                  imageUri={require("../image/flow.jpg")}
+                  imageUri={require("../image/code.jpg")}
                   name="flower"
                 />
                 <Category
@@ -100,7 +102,7 @@ const Home = () => {
                   name="flower"
                 />
                 <Category
-                  imageUri={require("../image/flow.jpg")}
+                  imageUri={require("../image/code.jpg")}
                   name="flower"
                 />
               </ScrollView>
@@ -108,48 +110,9 @@ const Home = () => {
           </View>
         </ScrollView>
       </View>
-      {/* <ScrollView style={Style.scrollView} horizontal={true}>
-      <View
-        style={[
-          Style.container,
-          {
-            // Try setting `flexDirection` to `"row"`.
-            flexDirection: "row",
-          },
-        ]}
-      >
-        <Text>Desi product</Text>
-        <
-        <View style={Style.box}><Text>1</Text></View>
-        <View style={Style.box}><Text>2</Text></View>
-        <View style={Style.box}><Text>1</Text></View>
-        <View style={Style.box}><Text>1</Text></View>
-        <View style={Style.box}><Text>1</Text></View>
-        <View style={Style.box}><Text>2</Text></View>
-        <View style={Style.box}><Text>1</Text></View>
-        <View style={Style.box}><Text>2</Text></View>
-      </View>
-      </ScrollView> */}
-
-      {/* <View style={Style.container}>
-        <ScrollView style={Style.scrollView}>
-        <View style={Style.box}>
-            <View style={Style.inner}>
-              <Text>box 1</Text>
-            </View>
-          </View>
-          <View style={Style.box}>
-            <View style={Style.inner}>
-              <Text>box 1</Text>
-            </View>
-          </View>
-          <View style={Style.box}>
-            <View style={Style.inner} >
-              <Text>box 1</Text>
-            </View>
-          </View>
-        </ScrollView>
-      </View> */}
+      <TouchableOpacity onPress={() => navigation.navigate("Product1")}>
+          <Text >Login</Text>
+        </TouchableOpacity>
     </View>
   );
 };
@@ -191,32 +154,5 @@ const Style = StyleSheet.create({
     borderColor: "black",
     backgroundColor: "lightblue",
   },
-  // scrollView: {
-  //   backgroundColor: "pink",
-  //   marginHorizontal: 5,
-  // },
-  // container: {
-  //   flex: 1,
-  //   backgroundColor:'white',
-  //   width:"100%",
-  //   height:'100%',
-  //   // padding:10,
-  //   // backgroundColor:'yellow',
-  //   flexDirection: "row",
-  //   flexWrap: "wrap",
-  //   justifyContent:'space-between',
-  // },
-  // box: {
-  //   flex:2,
-  //   width: 50,
-  //   height:50,
-  //   padding: 5,
-  // },
-  // inner: {
-  //   flex: 1,
-  //   backgroundColor: "black",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // },
 });
 export default Home;

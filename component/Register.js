@@ -12,35 +12,45 @@ import { useState } from "react";
 import { db } from "./firbass_connect";
 import { ref, set } from "firebase/database";
 
-const Register = () => {
+const Register = ({ navigation }) => {
   const [isChecked, setChecked] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const Submit = () => {
-    if (!name.trim()) {
-      Alert.alert("Every Field is required !");
-    } 
-    if (!email.trim()) {
-      Alert.alert("Every Field is required !");
-    } 
-    if (!password.trim()) {
-      Alert.alert("Every Field is required !");
-    } 
-    else {
-      set(ref(db, "user/" + email), {
-        email: email,
-        name: name,
-        password: password,
-      })
-        .then(() => {
-          alert("data is updated");
+    // try{
+      if (!name.trim()) {
+        Alert.alert("Every Field is required !");
+      }
+      if (!password.trim()) {
+        Alert.alert("Every Field is required !");
+      } 
+      if (!password.trim()) {
+        Alert.alert("Every Field is required !");
+      } 
+      else {
+        set(ref(db, "user/" + email), {
+          email: email,
+          name: name,
+          password: password,
         })
-        .catch((error) => {
-          alert(error);
-        });
-    }
+          .then(() => {
+            alert("data is updated");
+            navigation.navigate("Login");
+          })
+          .catch((error) => {
+            alert(error);
+          });
+        setName({name: "" });
+        setEmail({name: "" });
+        setPassword({name: "" }); 
+
+      }
+    // }
+    // catch(error){
+    //   console.log(error);
+    // }
   };
   return (
     <View style={styles.container}>
@@ -103,6 +113,15 @@ const Register = () => {
         >
           <Text style={styles.buttontext}>SignUp</Text>
         </TouchableOpacity>
+        <View style={styles.signu}>
+        <Text style={styles.Signupt}>Don't have an account ?</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <Text style={styles.Signup}>Login</Text>
+        </TouchableOpacity>
+        {/* <Text style={styles.Signup}
+        onPress ={()=> register()}
+        >SignUp</Text> */}
+      </View>
       </View>
     </View>
   );
@@ -169,6 +188,23 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     fontWeight: "500",
+  },
+  signu: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  Signupt: {
+    paddingLeft: 50,
+    color: "#63636b",
+    // textAlign:'center',
+    // justifyContent:'space-between'
+  },
+  Signup: {
+    paddingRight: 70,
+    textDecorationLine: "underline",
+    color: "#2017d1",
+    // textAlign:'center',
+    // justifyContent:'space-between'
   },
 });
 

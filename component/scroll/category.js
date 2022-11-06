@@ -6,8 +6,8 @@ export default class Category extends Component {
     return (
         <TouchableOpacity>
         <View style={{ height: 130, width: 130,marginLeft:10,borderWidth:0.4,borderColor:'#ddddd',marginRight:10 }}
-        onPress={() => Submit()}>
-        <View style={{ flex: 2 }}>
+        >
+        <View style={{ flex: 3 }}>
           <Image
             source={this.props.imageUri}
             style={{
